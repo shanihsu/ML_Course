@@ -24,17 +24,14 @@ def ml_loop(side: str):
     ball_served = False
     def move_to(player, pred, f) : #move platform to predicted position to catch ball 
         if player == '1P':
-            if scene_info["platform_1P"][0]+20  > (pred-10) and scene_info["platform_1P"][0]+20 < (pred+10): return 0 # NONE
-            elif scene_info["platform_1P"][0]+20 <= (pred-10) :
-                if f < 2:
-                    return 2
-                elif f >= 2:
-                    return 1 # goes right
-            else : 
-                if f < 2:
-                    return 1
-                elif f >= 2:
-                    return 2 # goes left
+             if f < 2 :
+                if scene_info["ball"][0]>0 : return 1
+                elif scene_info["ball"][0]<0 : return 2
+                else : return 0
+            else:
+                if scene_info["platform_1P"][0]+20  > (pred-10) and scene_info["platform_1P"][0]+20 < (pred+10): return 0 # NONE
+                elif scene_info["platform_1P"][0]+20 <= (pred-10) : return 1 # goes right
+                else : return 2 # goes left
         else :
             if scene_info["platform_2P"][0]+20  > (pred-10) and scene_info["platform_2P"][0]+20 < (pred+10): return 0 # NONE
             elif scene_info["platform_2P"][0]+20 <= (pred-10) : return 1 # goes right
