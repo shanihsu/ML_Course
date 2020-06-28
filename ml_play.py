@@ -29,14 +29,6 @@ class MLPlay:
         def check_grid():
             grid = set()
             speed_ahead = 100
-            #if self.car_pos[0] <= 60: # left bound
-            #    grid.add(1)
-            #    grid.add(4)
-            #    grid.add(7)
-            #elif self.car_pos[0] >= 595: # right bound
-            #    grid.add(3)
-            #    grid.add(6)
-            #    grid.add(9)
             if self.car_lane == 0: # left bound
                 grid.add(1)
                 grid.add(4)
@@ -51,28 +43,6 @@ class MLPlay:
                     x = self.car_pos[0] - car["pos"][0] # x relative position
                     y = self.car_pos[1] - car["pos"][1] # y relative position
                     lanes = car["pos"][0] // 70 # car lane
-                    #if x <= 40 and x >= -40 :      
-                    #    if y > 0 and y < 300:
-                    #        grid.add(2)
-                    #        if y < 200:
-                    #            speed_ahead = car["velocity"]
-                    #            grid.add(5) 
-                    #    elif y < 0 and y > -200:
-                    #        grid.add(8)
-                    #if x > -100 and x < -40 :
-                    #    if y > 80 and y < 250:
-                    #        grid.add(3)
-                    #    elif y < -80 and y > -200:
-                    #        grid.add(9)
-                    #    elif y < 80 and y > -80:
-                    #        grid.add(6)
-                    #if x < 100 and x > 40:
-                    #    if y > 80 and y < 250:
-                    #        grid.add(1)
-                    #    elif y < -80 and y > -200:
-                    #        grid.add(7)
-                    #    elif y < 80 and y > -80:
-                    #        grid.add(4)
                     if self.car_lane == lanes :      
                         if y > 0 and y < 300:
                             grid.add(2)
@@ -98,8 +68,6 @@ class MLPlay:
             return move(grid= grid, speed_ahead = speed_ahead)
             
         def move(grid, speed_ahead): 
-            # if self.player_no == 0:
-            #     print(grid)
             if len(grid) == 0:
                 return ["SPEED"]
             else:
@@ -137,8 +105,6 @@ class MLPlay:
                                 return ["SPEED"]
                             else:
                                 return ["BRAKE"]
-                    #if (self.car_pos[0] < 60 ):
-                    #    return ["SPEED", "MOVE_RIGHT"]
                     if (3 not in grid) and (6 not in grid) and (9 not in grid): # turn right
                         return ["SPEED", "MOVE_RIGHT"]
                     if (1 not in grid) and (4 not in grid) and (7 not in grid): # turn left 
@@ -146,11 +112,7 @@ class MLPlay:
                     if (3 not in grid) and (6 not in grid): # turn right
                         return ["SPEED", "MOVE_RIGHT"]
                     if (1 not in grid) and (4 not in grid): # turn left 
-                        return ["SPEED", "MOVE_LEFT"]
-                    #if (6 not in grid) and (9 not in grid): # turn right
-                    #    return ["MOVE_RIGHT"]
-                    #if (4 not in grid) and (7 not in grid): # turn left 
-                    #    return ["MOVE_LEFT"]    
+                        return ["SPEED", "MOVE_LEFT"]   
                     
                                 
                     
